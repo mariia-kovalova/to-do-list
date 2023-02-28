@@ -1,5 +1,7 @@
 # TO DO LIST - REACT || REDUX TOOLKIT
 
+Linkedin - https://www.linkedin.com/in/mariia-kova-lova/
+
 Потрібно створити ToDoList з можливістю створювати завдання:
 
 1. При натисканні на кнопку "Create" (після введення користувачем заголовку і
