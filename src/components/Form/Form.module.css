@@ -1,0 +1,50 @@
+.todoForm {
+  display: flex;
+  align-items: last baseline;
+  justify-content: center;
+  gap: 20px;
+}
+
+.todoInput {
+  flex: 1;
+  color: #fff;
+  background: #262626;
+  border: 1px solid #0d0d0d;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 16px;
+}
+
+.todoInput::placeholder {
+  color: #808080;
+}
+
+.todoBtn {
+  cursor: pointer;
+  padding: 16px;
+
+  font-weight: 700;
+  font-size: 14px;
+  background: #1e6f9f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 20px;
+}
+
+.error {
+  position: absolute;
+  bottom: 0;
+  color: #ff0000;
+}

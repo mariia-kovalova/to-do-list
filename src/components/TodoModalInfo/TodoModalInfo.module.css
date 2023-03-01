@@ -1,0 +1,20 @@
+.checkbox {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 50px;
+  width: 400px;
+  color: black;
+}
+
+.status {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
