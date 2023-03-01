@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Modal } from 'components/Modal';
 import PropTypes from 'prop-types';
 import css from './TodoItem.module.css';
-import { TodoModalInfo } from 'components/TodoModalInfo/TodoModalInfo';
+import { TodoModalInfo } from 'components/TodoModalInfo';
 
 export const TodoItem = ({ todo }) => {
   const [showModal, setShowModal] = useState(false);
@@ -49,7 +49,7 @@ export const TodoItem = ({ todo }) => {
 
 TodoItem.propTypes = {
   todo: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     isCompleted: PropTypes.bool.isRequired,
