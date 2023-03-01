@@ -15,11 +15,13 @@ export const Form = () => {
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
       case 'title':
-        value !== '' ? setErrorTitle(false) : setErrorTitle(true);
+        value.trim() !== '' ? setErrorTitle(false) : setErrorTitle(true);
         setTitle(value);
         break;
       case 'description':
-        value !== '' ? setErrorDescription(false) : setErrorDescription(true);
+        value.trim() !== ''
+          ? setErrorDescription(false)
+          : setErrorDescription(true);
         setDescription(value);
         break;
       default:
@@ -29,14 +31,16 @@ export const Form = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const titleValue = e.target.elements.title.value;
-    const descriptionValue = e.target.elements.description.value;
+    const titleValue = e.target.elements.title.value.trim();
+    const descriptionValue = e.target.elements.description.value.trim();
     titleValue === '' ? setErrorTitle(true) : setErrorTitle(false);
     descriptionValue === ''
       ? setErrorDescription(true)
       : setErrorDescription(false);
     if (titleValue !== '' && descriptionValue !== '') {
-      dispatch(addTodo({ title, description }));
+      dispatch(
+        addTodo({ title: title.trim(), description: description.trim() })
+      );
       setTitle('');
       setDescription('');
     }
