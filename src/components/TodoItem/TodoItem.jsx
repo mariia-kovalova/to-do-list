@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux';
 import { toggleCompleted } from 'redux/todosSlice';
 import { useState } from 'react';
-import { Modal } from 'components/Modal';
+import Modal from 'components/Modal/Modal';
+import TodoModalInfo from 'components/TodoModalInfo/TodoModalInfo';
 import PropTypes from 'prop-types';
 import css from './TodoItem.module.css';
-import { TodoModalInfo } from 'components/TodoModalInfo';
 
-export const TodoItem = ({ todo }) => {
+const TodoItem = ({ todo }) => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
@@ -55,3 +55,5 @@ TodoItem.propTypes = {
     isCompleted: PropTypes.bool.isRequired,
   }),
 };
+
+export default TodoItem;

@@ -1,8 +1,8 @@
-import { TodoItem } from 'components/TodoItem';
+import TodoItem from 'components/TodoItem/TodoItem';
 import { useSelector } from 'react-redux';
 import { getTodos } from 'redux/selectors';
 
-export const TodoList = () => {
+const TodoList = () => {
   const todos = useSelector(getTodos);
   return (
     <table>
@@ -22,3 +22,5 @@ export const TodoList = () => {
     </table>
   );
 };
+
+export default TodoList;

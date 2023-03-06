@@ -5,7 +5,7 @@ import css from './Modal.module.css';
 
 const modalRoot = document.querySelector('#modal-root');
 
-export const Modal = ({ children, onCloseModal }) => {
+const Modal = ({ children, onCloseModal }) => {
   useEffect(() => {
     const onKeyDown = e => {
       if (e.code === 'Escape') {
@@ -44,3 +44,5 @@ Modal.propTypes = {
   children: PropTypes.node,
   onCloseModal: PropTypes.func.isRequired,
 };
+
+export default Modal;

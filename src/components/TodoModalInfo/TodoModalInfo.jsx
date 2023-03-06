@@ -1,9 +1,10 @@
+import { memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { toggleCompleted } from 'redux/todosSlice';
 import PropTypes from 'prop-types';
 import css from './TodoModalInfo.module.css';
 
-export const TodoModalInfo = ({ todo }) => {
+const TodoModalInfo = ({ todo }) => {
   const dispatch = useDispatch();
 
   const handleToggle = () => dispatch(toggleCompleted(todo.id));
@@ -36,3 +37,5 @@ TodoModalInfo.propTypes = {
     isCompleted: PropTypes.bool.isRequired,
   }),
 };
+
+export default memo(TodoModalInfo);

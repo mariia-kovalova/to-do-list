@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../../redux/todosSlice';
 import css from './Form.module.css';
 
 const msg = 'This field is empty';
 
-export const Form = () => {
+const Form = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [errorTitle, setErrorTitle] = useState(false);
@@ -95,3 +95,5 @@ export const Form = () => {
     </form>
   );
 };
+
+export default memo(Form);

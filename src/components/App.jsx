@@ -1,8 +1,8 @@
-import { Form } from './Form';
+import Form from './Form/Form';
 import css from './App.module.css';
-import { TodoList } from './TodoList';
+import TodoList from './TodoList/TodoList';
 
-export const App = () => (
+const App = () => (
   <div className={css.container}>
     <div className={css.wrap}>
       <Form />
@@ -12,3 +12,9 @@ export const App = () => (
     </div>
   </div>
 );
+
+export default App;
+
+// let error = null;
+// не контрольовані інтупи (form Data, form.reset())
+// modal засунуть в модал віндов
