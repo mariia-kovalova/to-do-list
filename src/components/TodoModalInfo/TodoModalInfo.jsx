@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { toggleCompleted } from 'redux/todosSlice';
 import PropTypes from 'prop-types';
@@ -38,4 +37,4 @@ TodoModalInfo.propTypes = {
   }),
 };
 
-export default memo(TodoModalInfo);
+export default TodoModalInfo;

@@ -14,7 +14,3 @@ const App = () => (
 );
 
 export default App;
-
-// let error = null;
-// не контрольовані інтупи (form Data, form.reset())
-// modal засунуть в модал віндов
