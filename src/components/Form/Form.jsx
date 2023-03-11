@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../../redux/todosSlice';
 import css from './Form.module.css';
@@ -6,43 +6,33 @@ import css from './Form.module.css';
 const msg = 'This field is empty';
 
 const Form = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [errorTitle, setErrorTitle] = useState(false);
-  const [errorDescription, setErrorDescription] = useState(false);
+  const [error, setError] = useState({
+    title: false,
+    description: false,
+  });
   const dispatch = useDispatch();
 
   const handleChange = ({ target: { name, value } }) => {
-    switch (name) {
-      case 'title':
-        value.trim() !== '' ? setErrorTitle(false) : setErrorTitle(true);
-        setTitle(value);
-        break;
-      case 'description':
-        value.trim() !== ''
-          ? setErrorDescription(false)
-          : setErrorDescription(true);
-        setDescription(value);
-        break;
-      default:
-        return;
-    }
+    value.trim() !== ''
+      ? setError(prevState => ({ ...prevState, [name]: false }))
+      : setError(prevState => ({ ...prevState, [name]: true }));
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    const titleValue = e.target.elements.title.value.trim();
-    const descriptionValue = e.target.elements.description.value.trim();
-    titleValue === '' ? setErrorTitle(true) : setErrorTitle(false);
-    descriptionValue === ''
-      ? setErrorDescription(true)
-      : setErrorDescription(false);
-    if (titleValue !== '' && descriptionValue !== '') {
-      dispatch(
-        addTodo({ title: title.trim(), description: description.trim() })
-      );
-      setTitle('');
-      setDescription('');
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const todoInfo = {};
+    formData.forEach((value, key) => (todoInfo[key] = value.trim()));
+    Object.entries(todoInfo).forEach(([key, value]) => {
+      if (value === '') {
+        setError(prevState => ({ ...prevState, [key]: true }));
+        return false;
+      }
+    });
+    if (!error.title && !error.description) {
+      dispatch(addTodo(todoInfo));
+      form.reset();
     }
   };
 
@@ -60,10 +50,9 @@ const Form = () => {
           placeholder="Enter title"
           type="text"
           onChange={handleChange}
-          value={title}
-          style={style(errorTitle)}
+          style={style(error.title)}
         />
-        {errorTitle && (
+        {error.title && (
           <p className={css.error} role="alert">
             {msg}
           </p>
@@ -79,10 +68,9 @@ const Form = () => {
           placeholder="Enter description"
           type="text"
           onChange={handleChange}
-          value={description}
-          style={style(errorDescription)}
+          style={style(error.description)}
         />
-        {errorDescription && (
+        {error.description && (
           <p className={css.error} role="alert">
             {msg}
           </p>
@@ -96,4 +84,4 @@ const Form = () => {
   );
 };
 
-export default memo(Form);
+export default Form;

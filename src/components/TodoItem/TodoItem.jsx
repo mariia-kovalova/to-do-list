@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { toggleCompleted } from 'redux/todosSlice';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import Modal from 'components/Modal/Modal';
 import TodoModalInfo from 'components/TodoModalInfo/TodoModalInfo';
 import PropTypes from 'prop-types';
@@ -56,4 +56,4 @@ TodoItem.propTypes = {
   }),
 };
 
-export default TodoItem;
+export default memo(TodoItem);
