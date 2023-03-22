@@ -1,5 +1,20 @@
+.todo_item:hover {
+  position: relative;
+  cursor: pointer;
+  background-color: #545454;
+}
+
 .checkbox {
   width: 24px;
   height: 24px;
   cursor: pointer;
+}
+
+.loader_wrap {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  top: 50%;
+  right: 0.5%;
+  transform: translate(0, -50%);
 }

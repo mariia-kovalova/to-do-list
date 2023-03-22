@@ -52,11 +52,6 @@ table tr {
   padding: 5px;
 }
 
-.todo-item:hover {
-  cursor: pointer;
-  background-color: #ccc;
-}
-
 table th,
 table td {
   padding: 10px;

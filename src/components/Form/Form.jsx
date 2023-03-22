@@ -24,12 +24,16 @@ const Form = () => {
     const formData = new FormData(form);
     const todoInfo = {};
     formData.forEach((value, key) => (todoInfo[key] = value.trim()));
-    Object.entries(todoInfo).forEach(([key, value]) => {
-      if (value === '') {
-        setError(prevState => ({ ...prevState, [key]: true }));
-      }
-    });
-    if (!error.title && !error.description) {
+    const isValid = Object.entries(todoInfo)
+      .map(([key, value]) => {
+        if (value === '') {
+          setError(prevState => ({ ...prevState, [key]: true }));
+          return false;
+        }
+        return true;
+      })
+      .every(item => item === true);
+    if (isValid) {
       addTodo(todoInfo);
       form.reset();
     }

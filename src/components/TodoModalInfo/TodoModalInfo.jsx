@@ -1,10 +1,11 @@
+import Loader from 'components/Loader/Loader';
 import PropTypes from 'prop-types';
 import { useGetTodoByIdQuery, useUpdateTodoMutation } from 'redux/todosSlice';
 import css from './TodoModalInfo.module.css';
 
 const TodoModalInfo = ({ todoId }) => {
   const { data: todo, error, isLoading } = useGetTodoByIdQuery(todoId);
-  const [updateTodo] = useUpdateTodoMutation();
+  const [updateTodo, { isLoading: isUpdating }] = useUpdateTodoMutation();
 
   const handleToggle = () => {
     updateTodo({
@@ -14,9 +15,15 @@ const TodoModalInfo = ({ todoId }) => {
   };
 
   return (
-    <>
+    <div className={css.wrap}>
+      {isLoading && (
+        <div className={css.big_loader_wrap}>
+          <Loader color={'#000'} />
+        </div>
+      )}
+      {error && <div>Sorry, something went wrong...</div>}
       {!isLoading && todo && (
-        <div className={css.wrap}>
+        <>
           <h2>{todo.title}</h2>
           <p>Description:</p>
           <p>{todo.description}</p>
@@ -29,12 +36,15 @@ const TodoModalInfo = ({ todoId }) => {
               checked={todo.isCompleted}
               onChange={handleToggle}
             />
+            {isUpdating && (
+              <div className={css.small_loader_wrap}>
+                <Loader color={'#000'} />
+              </div>
+            )}
           </div>
-        </div>
+        </>
       )}
-      {isLoading && <div>Loading...</div>}
-      {error && <div>Sorry, something went wrong...</div>}
-    </>
+    </div>
   );
 };
 

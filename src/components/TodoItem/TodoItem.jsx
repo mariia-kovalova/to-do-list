@@ -4,9 +4,10 @@ import Modal from 'components/Modal/Modal';
 import TodoModalInfo from 'components/TodoModalInfo/TodoModalInfo';
 import PropTypes from 'prop-types';
 import css from './TodoItem.module.css';
+import Loader from 'components/Loader/Loader';
 
 const TodoItem = ({ todo }) => {
-  const [updateTodo] = useUpdateTodoMutation();
+  const [updateTodo, { isLoading: isUpdating }] = useUpdateTodoMutation();
   const [showModal, setShowModal] = useState(false);
 
   const handleToggle = () => {
@@ -28,7 +29,7 @@ const TodoItem = ({ todo }) => {
   return (
     <>
       {todo && (
-        <tr className="todo-item" onClick={handleOpenModal}>
+        <tr className={css.todo_item} onClick={handleOpenModal}>
           <td>{todo.id}</td>
           <td>{todo.title}</td>
           <td>{todo.description}</td>
@@ -39,6 +40,11 @@ const TodoItem = ({ todo }) => {
               checked={todo.isCompleted}
               onChange={handleToggle}
             />
+            {isUpdating && (
+              <div className={css.loader_wrap}>
+                <Loader color={'#fff'} />
+              </div>
+            )}
           </td>
         </tr>
       )}
