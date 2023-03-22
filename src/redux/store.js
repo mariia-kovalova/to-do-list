@@ -1,10 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
-import todos from './todosSlice';
+import { setupListeners } from '@reduxjs/toolkit/dist/query';
+import { todoApi } from './todosSlice';
 
 const store = configureStore({
   reducer: {
-    todos,
+    [todoApi.reducerPath]: todoApi.reducer,
   },
+  middleware: getDefaultMiddleware => [
+    ...getDefaultMiddleware(),
+    todoApi.middleware,
+  ],
 });
+
+setupListeners(store.dispatch);
 
 export default store;

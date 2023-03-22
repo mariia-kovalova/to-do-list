@@ -1,16 +1,20 @@
-import { useDispatch } from 'react-redux';
-import { toggleCompleted } from 'redux/todosSlice';
 import { memo, useState } from 'react';
+import { useUpdateTodoMutation } from 'redux/todosSlice';
 import Modal from 'components/Modal/Modal';
 import TodoModalInfo from 'components/TodoModalInfo/TodoModalInfo';
 import PropTypes from 'prop-types';
 import css from './TodoItem.module.css';
 
 const TodoItem = ({ todo }) => {
+  const [updateTodo] = useUpdateTodoMutation();
   const [showModal, setShowModal] = useState(false);
-  const dispatch = useDispatch();
 
-  const handleToggle = () => dispatch(toggleCompleted(todo.id));
+  const handleToggle = () => {
+    updateTodo({
+      id: todo.id,
+      isCompleted: !todo.isCompleted,
+    });
+  };
 
   const handleOpenModal = ({ target }) => {
     if (target.nodeName === 'INPUT') return;
@@ -40,7 +44,7 @@ const TodoItem = ({ todo }) => {
       )}
       {showModal && (
         <Modal onCloseModal={handleCloseModal}>
-          <TodoModalInfo todo={todo} />
+          <TodoModalInfo todoId={todo.id} />
         </Modal>
       )}
     </>

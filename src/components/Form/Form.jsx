@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addTodo } from '../../redux/todosSlice';
+import { useAddTodoMutation } from 'redux/todosSlice';
 import css from './Form.module.css';
 
 const msg = 'This field is empty';
 
 const Form = () => {
+  const [addTodo] = useAddTodoMutation();
+
   const [error, setError] = useState({
     title: false,
     description: false,
   });
-  const dispatch = useDispatch();
 
   const handleChange = ({ target: { name, value } }) => {
     value.trim() !== ''
@@ -27,11 +27,10 @@ const Form = () => {
     Object.entries(todoInfo).forEach(([key, value]) => {
       if (value === '') {
         setError(prevState => ({ ...prevState, [key]: true }));
-        return false;
       }
     });
     if (!error.title && !error.description) {
-      dispatch(addTodo(todoInfo));
+      addTodo(todoInfo);
       form.reset();
     }
   };
